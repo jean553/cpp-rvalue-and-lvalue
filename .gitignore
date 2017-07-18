@@ -1,0 +1,5 @@
+bin/
+build/
+*.orig
+*.swp
+cpp-rvalue-and-lvalue
