@@ -92,3 +92,45 @@ MyClass a;
 set(std::move(a));
 set(get());
 ```
+
+## `rvalue references` vs `universal references`
+
+Both of `rvalue references` and `universal references` have the same syntax: `T&&`.
+ * the `rvalue` can only be linked with `rvalue` and indicates that move semantics can be used,
+ * `universal reference` represents something that can be a `lvalue reference`,
+a `rvalue reference`, an `object`, a `const object`... etc...
+
+### `rvalue reference`
+
+The examples below are `rvalue` references, because there is no type deduction.
+
+```cpp
+MyClass&& obj;
+
+void function(MyClass&& obj);
+```
+
+### `universal references`
+
+The examples below are `universal references`, because there is a type deduction.
+
+```cpp
+template<typename T>
+void function(T&& object) {
+}
+
+auto&& value = otherValue;
+```
+
+Universal references cannot be marked as `const` or be used with another type.
+For example, the following examples are `rvalue references`:
+
+```cpp
+template<typename T>
+void function(const T&& object) {
+}
+
+template<typename T>
+void function(std::vector<T>&& object) {
+}
+```
