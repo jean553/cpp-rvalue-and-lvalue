@@ -67,5 +67,28 @@ Output:
 ```
 constructor
 constructor
-move
+move operator
+```
+
+## When may be called the move constructor ?
+
+In the following cases, there is no guarantee that move semantics will be used.
+The compiler may simply directly set the expected content into the targetted variable,
+depends if this content has to be used elsewhere or not.
+
+### Temporary object initializer
+
+```cpp
+MyClass a = get();
+```
+
+### Use a temporary object as a function parameter
+
+```cpp
+void set(MyClass&& obj) {
+}
+
+MyClass a;
+set(std::move(a));
+set(get());
 ```

@@ -26,10 +26,14 @@ MyClass get() {
     return a;
 }
 
+void set(MyClass&& obj) {
+}
+
 int main() {
 
     MyClass a;
-    a = get();
+    set(std::move(a));
+    set(get());
 
     return EXIT_SUCCESS;
 }
